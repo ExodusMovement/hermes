@@ -30,10 +30,7 @@ workflows:
       - npm:
           requires:
             - android
-            - linux
             - package-apple-runtime
-            - windows
-            - macos
       - emscripten
       - test-linux
       - test-e2e
@@ -71,6 +68,8 @@ jobs:
             yes | sdkmanager "cmake;3.18.1" &
             mkdir -p "$HERMES_WS_DIR" "$HERMES_WS_DIR/output"
             ln -sf "$PWD" "$HERMES_WS_DIR/hermes"
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B53DC80D13EDEF05
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C0BA5CE6DC6315A3
             sudo apt-get update
             sudo apt-get install -y cmake ninja-build libicu-dev
             wait
